@@ -1,6 +1,8 @@
 # Modo Yoga to Strava Sync App
 
-This application syncs yoga session data from Modo Yoga to Strava automatically. When a user checks in to a class at Modo Yoga, the data is sent to Strava, logging it as a yoga activity.
+This personal tool syncs yoga session data from Modo Yoga to Strava automatically. When a user checks in to a class at Modo Yoga, the data is sent to Strava, logging it as a yoga activity.
+
+Could be developped further into a plugin of easy Modo/Strava syncing for regular users. For now it needs api creds.
 
 ## Table of Contents
 
