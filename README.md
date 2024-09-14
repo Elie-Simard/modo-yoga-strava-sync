@@ -1,7 +1,3 @@
-To create a detailed README that explains how your app works and how each file and line of code interacts, you’ll want to break it down into sections. This will help anyone who reads it understand the purpose of the app, its setup, and how all the parts come together. Here’s an example of how you might structure it:
-
----
-
 # Modo Yoga to Strava Sync App
 
 This application syncs yoga session data from Modo Yoga to Strava automatically. When a user checks in to a class at Modo Yoga, the data is sent to Strava, logging it as a yoga activity.
@@ -12,7 +8,6 @@ This application syncs yoga session data from Modo Yoga to Strava automatically.
 - [How it Works](#how-it-works)
 - [Project Structure](#project-structure)
 - [Installation](#installation)
-- [Environment Variables](#environment-variables)
 - [Routes](#routes)
 - [Authentication](#authentication)
 - [Syncing Yoga Sessions](#syncing-yoga-sessions)
@@ -38,7 +33,7 @@ Here is an explanation of each file and how the code in these files interacts:
 ├── config
 │   └── stravaConfig.js      # Configuration file for Strava API credentials
 ├── controllers
-│   ├── modoWebhookHandler.js # Handles incoming webhooks from Modo Yoga
+│   ├── modoWebhookHandler.js # Handles incoming webhooks from Modo Yoga (In development, assistance is needed from marianatech API devs to get access)
 │   ├── stravaSync.js         # Synchronizes Modo Yoga sessions with Strava
 │   └── yogaSessions.js       # (Optional) Static list of yoga sessions for testing
 ├── env.example             # Example environment variables file
@@ -82,12 +77,12 @@ module.exports = {
 
 - **Purpose**: This configuration file centralizes API credentials (client ID, client secret, and tokens), ensuring that sensitive information is stored in environment variables and not directly in the codebase.
 
-### `controllers/modoWebhookHandler.js`
+### `controllers/modoWebhookHandler.js (IN  DEVELOPPMENT)`
 
-This file handles the webhook events received from Modo Yoga.
+This file ****will want to**** handles the webhook events received from Modo Yoga.
 
 - **Key Function**: `handleModoWebhook`
-  - It takes in the webhook data and processes only the `reservation.checkedin` event.
+  - It will take in the webhook data and processes only the `reservation.checkedin` event.
   - Extracts session details (class name, start time) and calls `createYogaActivity` to sync the session with Strava.
   
 ```javascript
@@ -129,7 +124,7 @@ const createYogaActivity = async (session) => {
 
 ### `controllers/yogaSessions.js`
 
-This file is optional and used to test static sessions.
+This file is optional and used to test static sessions and strava import.
 
 ```javascript
 module.exports = [
@@ -205,14 +200,6 @@ STRAVA_REFRESH_TOKEN=your_refresh_token
 
 3. Create a `.env` file based on the `env.example` file and add your Strava API credentials.
 
-## Environment Variables
-
-- **STRAVA_CLIENT_ID**: Your Strava app's client ID.
-- **STRAVA_CLIENT_SECRET**: Your Strava app's client secret.
-- **STRAVA_REDIRECT_URI**: Your redirect URI (not always needed for this project).
-- **STRAVA_ACCESS_TOKEN**: The initial access token for Strava API.
-- **STRAVA_REFRESH_TOKEN**: The refresh token for generating new access tokens.
-
 ## Routes
 
 - **POST /api/webhook/modo**: Modo Yoga sends a webhook here when a user checks in. The app processes this and logs the activity to Strava.
@@ -228,7 +215,3 @@ The app uses the `createYogaActivity` function to send yoga session details (e.g
 ## Error Handling
 
 The app uses a global error handler to catch any unexpected errors during requests. This ensures the app doesn't crash and provides useful error information for debugging.
-
----
-
-This README gives a detailed explanation of how the app works and how its components interact. You can further adapt it based on your needs or specific technical details.
